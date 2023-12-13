@@ -3,6 +3,7 @@ import 'activity_tab/activity_tab.dart';
 import 'home_tab/home_tab.dart';
 import 'package:flutter/material.dart';
 
+import 'profile_and_settings_tab/index.dart';
 import 'search_tab/search_tab.dart';
 import 'widgets/index.dart';
 
@@ -13,8 +14,7 @@ class BottomNavigationPage extends StatefulWidget {
   State<BottomNavigationPage> createState() => _BottomNavigationPageState();
 }
 
-class _BottomNavigationPageState extends State<BottomNavigationPage>
-    with SingleTickerProviderStateMixin {
+class _BottomNavigationPageState extends State<BottomNavigationPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _sclaeAnimation;
 
@@ -48,14 +48,13 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
         return Transform.scale(
           scale: _sclaeAnimation.value,
           child: Scaffold(
-            backgroundColor: Colors.black,
+            backgroundColor: _selectedIndex == 0 || _selectedIndex == 2 ? Colors.black : Colors.white,
             body: Center(
               child: _getPage(_selectedIndex),
             ),
             bottomNavigationBar: ThreadBottomNavigationBar(
               selectedIndex: _selectedIndex,
-              onItemTapped: (index) =>
-                  _onItemTapped(index: index, context: context),
+              onItemTapped: (index) => _onItemTapped(index: index, context: context),
             ),
           ),
         );
@@ -73,9 +72,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
       case 3:
         return const ActivityTab();
       case 4:
-        return const Placeholder();
+        return const ProfileAndSettingsTab();
       default:
-        return const HomeTab();
+        return const ProfileAndSettingsTab();
     }
   }
 
