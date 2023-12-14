@@ -8,7 +8,8 @@ class ProfileAndSettingsTab extends StatefulWidget {
   State<ProfileAndSettingsTab> createState() => _ProfileAndSettingsTabState();
 }
 
-class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab> with SingleTickerProviderStateMixin {
+class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab>
+    with SingleTickerProviderStateMixin {
   late final _tabController;
 
   @override
@@ -30,10 +31,10 @@ class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab> with Sing
         slivers: [
           SliverAppBar(
             flexibleSpace: _profileAndSettings(),
-            expandedHeight: 200,
+            expandedHeight: 300,
             pinned: true,
             floating: true,
-            // snap: true,
+            snap: true,
             bottom: TabBar(
               controller: _tabController,
               tabs: [
@@ -49,7 +50,9 @@ class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab> with Sing
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
-                return ListTile(title: Text('Item #$index', style: TextStyle(fontSize: 24, color: Colors.white)));
+                return ListTile(
+                    title: Text('Item #$index',
+                        style: TextStyle(fontSize: 24, color: Colors.white)));
               },
               childCount: 100, // Number of items in the list
             ),
@@ -64,6 +67,8 @@ class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab> with Sing
       padding: EdgeInsets.symmetric(horizontal: 16),
       child: Column(children: [
         _settingRow(),
+        _profileDashBoard(),
+        _editAndShareProfile(),
       ]),
     );
   }
@@ -87,6 +92,62 @@ class _ProfileAndSettingsTabState extends State<ProfileAndSettingsTab> with Sing
               icon: const FaIcon(FontAwesomeIcons.bars),
             ),
           ],
+        ),
+      ],
+    );
+  }
+
+  Widget _profileDashBoard() {
+    return Row(children: [_detailProfile(), _avatarProfile()]);
+  }
+
+  Widget _detailProfile() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'John Doe',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          '@johndoe',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        Text(
+          'This is my bio',
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _avatarProfile() {
+    return CircleAvatar(
+      radius: 40,
+      backgroundImage: AssetImage('assets/images/profile_image_1.jpg'),
+    );
+  }
+
+  Widget _editAndShareProfile() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        ElevatedButton(
+          onPressed: () {},
+          child: Text('Edit Profile'),
+        ),
+        ElevatedButton(
+          onPressed: () {},
+          child: Text('Share Profile'),
         ),
       ],
     );
