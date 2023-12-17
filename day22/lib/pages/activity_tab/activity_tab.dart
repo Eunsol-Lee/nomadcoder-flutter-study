@@ -33,7 +33,6 @@ class _ActivityTabState extends State<ActivityTab>
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: Colors.white,
       child: SafeArea(
         child: Column(
           children: [

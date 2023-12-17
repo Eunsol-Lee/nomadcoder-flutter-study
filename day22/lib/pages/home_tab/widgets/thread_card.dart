@@ -181,7 +181,6 @@ class ThreadCard extends StatelessWidget {
       onPressed: onSettingPressed,
       icon: const Icon(
         Icons.more_horiz,
-        color: Colors.black,
         size: 28,
       ),
     );

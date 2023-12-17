@@ -14,7 +14,8 @@ class BottomNavigationPage extends StatefulWidget {
   State<BottomNavigationPage> createState() => _BottomNavigationPageState();
 }
 
-class _BottomNavigationPageState extends State<BottomNavigationPage> with SingleTickerProviderStateMixin {
+class _BottomNavigationPageState extends State<BottomNavigationPage>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _sclaeAnimation;
 
@@ -48,13 +49,21 @@ class _BottomNavigationPageState extends State<BottomNavigationPage> with Single
         return Transform.scale(
           scale: _sclaeAnimation.value,
           child: Scaffold(
-            backgroundColor: _selectedIndex == 0 || _selectedIndex == 2 ? Colors.black : Colors.white,
-            body: Center(
+            backgroundColor: Theme.of(context).shadowColor,
+            body: Container(
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                color: Theme.of(context).scaffoldBackgroundColor,
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(
+                        16)), // This line makes the borders rounded
+              ),
               child: _getPage(_selectedIndex),
             ),
             bottomNavigationBar: ThreadBottomNavigationBar(
               selectedIndex: _selectedIndex,
-              onItemTapped: (index) => _onItemTapped(index: index, context: context),
+              onItemTapped: (index) =>
+                  _onItemTapped(index: index, context: context),
             ),
           ),
         );

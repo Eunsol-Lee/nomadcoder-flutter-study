@@ -1,4 +1,5 @@
 import 'package:day22/pages/widgets/index.dart';
+import 'package:day22/utils/utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -11,7 +12,6 @@ class SearchTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      color: Colors.white,
       child: SafeArea(
         child: Column(
           children: [
@@ -22,7 +22,8 @@ class SearchTab extends StatelessWidget {
               padding: const EdgeInsets.all(10),
               style: const TextStyle(fontSize: 16),
               decoration: BoxDecoration(
-                color: Colors.grey[200],
+                color:
+                    isDarkMode(context) ? Colors.grey[800] : Colors.grey[200],
                 borderRadius: BorderRadius.circular(10),
               ),
             ),

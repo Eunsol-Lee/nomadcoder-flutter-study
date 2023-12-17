@@ -39,10 +39,6 @@ class ThreadBottomNavigationBar extends StatelessWidget {
         ),
       ],
       currentIndex: selectedIndex,
-      selectedItemColor: Colors.black,
-      unselectedItemColor: Colors.grey,
-      showUnselectedLabels: false,
-      showSelectedLabels: false,
       onTap: onItemTapped,
     );
   }

@@ -68,7 +68,7 @@ class _NewThreadBottomSheetState extends State<NewThreadBottomSheet> {
           const Text(
             'New Thread',
             style: TextStyle(
-              color: Colors.black,
+              // color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
