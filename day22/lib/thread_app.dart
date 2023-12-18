@@ -1,12 +1,13 @@
-import 'package:day22/pages/bottom_navigation_page.dart';
 import 'package:flutter/material.dart';
+
+import 'router.dart';
 
 class ThreadApp extends StatelessWidget {
   const ThreadApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Thread',
       themeMode: ThemeMode.system,
@@ -30,7 +31,7 @@ class ThreadApp extends StatelessWidget {
           showSelectedLabels: false,
         ),
       ),
-      home: BottomNavigationPage(),
+      routerConfig: router,
     );
   }
 }
