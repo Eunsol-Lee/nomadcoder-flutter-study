@@ -1,17 +1,13 @@
-import 'package:flutter/material.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-class ThemeModel extends ChangeNotifier {
-  bool _darkModel = false;
+part 'theme_model.g.dart';
 
-  void toggleDarkModel() {
-    _darkModel = !_darkModel;
-    notifyListeners();
-  }
+@riverpod
+class ThemeModel extends _$ThemeModel {
+  @override
+  bool build() => false;
 
   void updateDarkModel(bool value) {
-    _darkModel = value;
-    notifyListeners();
+    state = value;
   }
-
-  get isDarkModel => _darkModel;
 }
