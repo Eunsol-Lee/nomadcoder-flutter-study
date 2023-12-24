@@ -1,4 +1,5 @@
 import 'package:day22/pages/bottom_navigation_page.dart';
+import 'package:day22/pages/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 
 class ThreadApp extends StatelessWidget {
@@ -30,7 +31,7 @@ class ThreadApp extends StatelessWidget {
           showSelectedLabels: false,
         ),
       ),
-      home: BottomNavigationPage(),
+      home: const LoginPage(),
     );
   }
 }
