@@ -1,16 +1,20 @@
-import 'package:day22/pages/bottom_navigation_page.dart';
 import 'package:day22/pages/login_page/login_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ThreadApp extends StatelessWidget {
+import 'pages/theme_model.dart';
+import 'router.dart';
+
+class ThreadApp extends ConsumerWidget {
   const ThreadApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Thread',
-      themeMode: ThemeMode.system,
+      themeMode:
+          (ref.watch(themeModelProvider) ? ThemeMode.dark : ThemeMode.light),
       theme: ThemeData(
         brightness: Brightness.light,
         bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -31,7 +35,7 @@ class ThreadApp extends StatelessWidget {
           showSelectedLabels: false,
         ),
       ),
-      home: const LoginPage(),
+      routerConfig: router,
     );
   }
 }

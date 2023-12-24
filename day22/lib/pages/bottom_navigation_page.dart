@@ -1,3 +1,5 @@
+import 'package:go_router/go_router.dart';
+
 import 'activity_tab/activity_tab.dart';
 
 import 'home_tab/home_tab.dart';
@@ -8,14 +10,14 @@ import 'search_tab/search_tab.dart';
 import 'widgets/index.dart';
 
 class BottomNavigationPage extends StatefulWidget {
-  const BottomNavigationPage({super.key});
+  final int? index;
+  const BottomNavigationPage({super.key, this.index});
 
   @override
   State<BottomNavigationPage> createState() => _BottomNavigationPageState();
 }
 
-class _BottomNavigationPageState extends State<BottomNavigationPage>
-    with SingleTickerProviderStateMixin {
+class _BottomNavigationPageState extends State<BottomNavigationPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _sclaeAnimation;
 
@@ -24,6 +26,9 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
   @override
   void initState() {
     super.initState();
+
+    _selectedIndex = widget.index ?? 0;
+
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
@@ -54,16 +59,13 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 color: Theme.of(context).scaffoldBackgroundColor,
-                borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(
-                        16)), // This line makes the borders rounded
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(16)), // This line makes the borders rounded
               ),
               child: _getPage(_selectedIndex),
             ),
             bottomNavigationBar: ThreadBottomNavigationBar(
               selectedIndex: _selectedIndex,
-              onItemTapped: (index) =>
-                  _onItemTapped(index: index, context: context),
+              onItemTapped: (index) => _onItemTapped(index: index, context: context),
             ),
           ),
         );
@@ -96,6 +98,20 @@ class _BottomNavigationPageState extends State<BottomNavigationPage>
 
     if (index == 2) {
       _showNewThreadBottomSheet(context);
+    }
+
+    switch (index) {
+      case 0:
+        context.go('/');
+      case 1:
+        context.go('/search');
+      case 3:
+        context.go('/activity');
+      case 4:
+        context.go('/settings');
+
+      default:
+        context.go('/');
     }
   }
 
