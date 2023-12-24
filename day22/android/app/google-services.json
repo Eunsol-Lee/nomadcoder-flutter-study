@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "599214026957",
+    "project_id": "threadproject-abd32ke",
+    "storage_bucket": "threadproject-abd32ke.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:599214026957:android:15179a0ef77daefcc0f984",
+        "android_client_info": {
+          "package_name": "com.example.day22"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBQcYmyIKjgc_8Yt7a0iIuPkoeOMCsvPZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

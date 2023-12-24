@@ -1,4 +1,3 @@
-import 'package:day22/pages/login_page/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -35,7 +34,7 @@ class ThreadApp extends ConsumerWidget {
           showSelectedLabels: false,
         ),
       ),
-      routerConfig: router,
+      routerConfig: ref.watch(routerProvider),
     );
   }
 }

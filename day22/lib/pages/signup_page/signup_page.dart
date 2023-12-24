@@ -1,28 +1,29 @@
+import 'package:day22/pages/index.dart';
+import 'package:day22/repositories/authentication_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:go_router/go_router.dart';
 
-import '../../repositories/authentication_repository.dart';
-import '../index.dart';
+class SignupPage extends ConsumerStatefulWidget {
+  static const routePath = '/signup';
+  static const routeName = 'signup';
 
-class LoginPage extends ConsumerStatefulWidget {
-  static const routePath = '/login';
-  static const routeName = 'login';
-
-  const LoginPage({super.key});
+  const SignupPage({super.key});
 
   @override
-  ConsumerState<LoginPage> createState() => _LoginPageState();
+  ConsumerState<SignupPage> createState() => _SignupPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _SignupPageState extends ConsumerState<SignupPage> {
   final TextEditingController _mobileNumberOrEmailController =
       TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(
+    BuildContext context,
+  ) {
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -79,9 +80,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
             const SizedBox(height: 12),
             GestureDetector(
-              onTap: () {
-                _login();
-              },
+              onTap: _createAccount,
               child: Container(
                 decoration: BoxDecoration(
                   color: Colors.blueAccent.shade400,
@@ -91,7 +90,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 height: 48,
                 alignment: Alignment.center,
                 child: Text(
-                  'Log in',
+                  'Create new account',
                   style: TextStyle(
                     color: Theme.of(context).colorScheme.onPrimary,
                     fontSize: 20,
@@ -100,20 +99,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 12),
-            GestureDetector(
-              child: Container(
-                width: double.infinity,
-                height: 48,
-                alignment: Alignment.center,
-                child: Text('Forgot password?',
-                    style: Theme.of(context).textTheme.headlineSmall),
-              ),
-            ),
             const Spacer(),
             GestureDetector(
               onTap: () {
-                context.pushNamed(SignupPage.routeName);
+                context.pushNamed(LoginPage.routeName);
               },
               child: Container(
                 decoration: BoxDecoration(
@@ -125,7 +114,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 width: double.infinity,
                 height: 48,
                 alignment: Alignment.center,
-                child: Text('Create new account',
+                child: Text('Login',
                     style: Theme.of(context).textTheme.headlineSmall),
               ),
             ),
@@ -156,12 +145,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  void _login() async {
+  void _createAccount() async {
     try {
-      final userCredential = await ref.read(authenticationRepository).login(
-            _mobileNumberOrEmailController.text,
-            _passwordController.text,
-          );
+      final userCredential =
+          await ref.read(authenticationRepository).createAccount(
+                _mobileNumberOrEmailController.text,
+                _passwordController.text,
+              );
       context.goNamed(BottomNavigationPage.routeName);
     } catch (e) {
       print("Error: $e");
