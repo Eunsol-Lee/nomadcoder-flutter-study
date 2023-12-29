@@ -158,10 +158,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
   void _login() async {
     try {
-      final userCredential = await ref.read(authenticationRepository).login(
-            _mobileNumberOrEmailController.text,
-            _passwordController.text,
-          );
+      final userCredential =
+          await ref.read(authenticationRepositoryProvider).login(
+                _mobileNumberOrEmailController.text,
+                _passwordController.text,
+              );
       context.goNamed(BottomNavigationPage.routeName);
     } catch (e) {
       print("Error: $e");

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class ProfileTileWithFollow extends StatelessWidget {
   final String name;
-  final String userName;
   final String imagePath;
   final int followers;
   final bool isFollowing;
+  final String text;
 
   const ProfileTileWithFollow(
       {super.key,
       required this.name,
-      required this.userName,
       required this.imagePath,
+      required this.text,
       required this.followers,
       required this.isFollowing});
 
@@ -44,9 +44,8 @@ class ProfileTileWithFollow extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            userName,
-            style: const TextStyle(
-                color: Colors.grey, fontWeight: FontWeight.bold),
+            text,
+            style: const TextStyle(color: Colors.black),
           ),
           const SizedBox(height: 4),
           Text(

@@ -5,6 +5,7 @@ import 'package:day22/pages/theme_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import '../../repositories/document_repository.dart';
 import 'widgets/divider_between_rounded_button.dart';
 import 'widgets/modal_bottom_sheet_top_decoration.dart';
 import 'widgets/next_page_button.dart';
@@ -14,6 +15,8 @@ class HomeTab extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final documents = ref.watch(allDocumentsProvider);
+
     return Container(
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
@@ -28,68 +31,29 @@ class HomeTab extends ConsumerWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _title(ref),
-              ThreadCard(
-                profileImagePath: 'assets/images/profile_image_1.jpg',
-                name: 'Taro Yamada',
-                isAuthorized: true,
-                timeOfCreation: '2m',
-                bodyText: 'Hello, World! hahadkdgjasldkfjaslkdfjaklsdfjalksdjflkasjdflasjdfklasdf asdlfkjasdlkfjalskdjf',
-                bodyImagePaths: const [
-                  'assets/images/body_image_1.png',
-                  'assets/images/body_image_2.png',
-                  'assets/images/body_image_3.png',
-                ],
-                commentersProfileImagePaths: const [
-                  'assets/images/profile_image_2.jpg',
-                  'assets/images/profile_image_3.jpg',
-                  'assets/images/profile_image_4.jpg',
-                ],
-                commentCount: 3,
-                likeCount: 5,
-                onSettingPressed: () => _showSettingBottomCard(context),
-              ),
-              ThreadCard(
-                profileImagePath: 'assets/images/profile_image_1.jpg',
-                name: 'Taro Test',
-                isAuthorized: true,
-                timeOfCreation: '2m',
-                bodyText: 'Hello, salkfjasdfWorld!',
-                bodyImagePaths: const [],
-                commentersProfileImagePaths: const [
-                  'assets/images/profile_image_1.jpg',
-                  'assets/images/profile_image_2.jpg',
-                  'assets/images/profile_image_3.jpg',
-                ],
-                commentCount: 3,
-                likeCount: 5,
-                onSettingPressed: _onSettingPressed,
-              ),
-              ThreadCard(
-                profileImagePath: 'assets/images/profile_image_1.jpg',
-                name: 'Taro Yamada',
-                isAuthorized: true,
-                timeOfCreation: '2m',
-                bodyText: 'Hello, Woraslkdfjasdlkfjaskldfjalksdjfalksdjfklasdjflaksdjfklasdjfaskldjfald!',
-                bodyImagePaths: const [],
-                commentersProfileImagePaths: const [
-                  'assets/images/profile_image_2.jpg',
-                  'assets/images/profile_image_3.jpg',
-                ],
-                commentCount: 2,
-                likeCount: 5,
-                onSettingPressed: _onSettingPressed,
-              ),
-              ThreadCard(
-                profileImagePath: 'assets/images/profile_image_1.jpg',
-                name: 'Taro Yamada',
-                isAuthorized: true,
-                timeOfCreation: '2m',
-                bodyText: 'Hello, World!',
-                bodyImagePaths: const [],
-                commentersProfileImagePaths: const [],
-                commentCount: 0,
-                likeCount: 5,
-                onSettingPressed: _onSettingPressed,
+              documents.when(
+                data: (docs) => Column(
+                  children: docs.map((doc) {
+                    return ThreadCard(
+                      profileImagePath: 'assets/images/profile_image_1.jpg',
+                      name: 'Anoyomous',
+                      isAuthorized: true,
+                      timeOfCreation: '0m',
+                      bodyText: doc['text'],
+                      bodyImagePaths: const [
+                        // 'assets/images/body_image_1.png',
+                        // 'assets/images/body_image_2.png',
+                        // 'assets/images/body_image_3.png',
+                      ],
+                      commentersProfileImagePaths: [],
+                      commentCount: 0,
+                      likeCount: 0,
+                      onSettingPressed: () => _showSettingBottomCard(context),
+                    );
+                  }).toList(),
+                ),
+                loading: () => const CircularProgressIndicator(),
+                error: (e, stack) => Text('Error: $e'),
               ),
             ],
           ),
@@ -106,7 +70,8 @@ class HomeTab extends ConsumerWidget {
           const Text('Dark'),
           Switch(
             value: ref.watch(themeModelProvider),
-            onChanged: (value) => ref.read(themeModelProvider.notifier).updateDarkModel(value),
+            onChanged: (value) =>
+                ref.read(themeModelProvider.notifier).updateDarkModel(value),
           ),
           const FaIcon(
             FontAwesomeIcons.threads,

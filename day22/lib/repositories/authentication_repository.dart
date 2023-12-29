@@ -9,18 +9,19 @@ class AuthenticationRepository {
   bool get isLoggedIn => user != null;
 
   Future<UserCredential> createAccount(String email, String password) async {
-    return await FirebaseAuth.instance.createUserWithEmailAndPassword(
+    return await _firebaseAuth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 
   Future<UserCredential> login(String email, String password) async {
-    return await FirebaseAuth.instance.signInWithEmailAndPassword(
+    return await _firebaseAuth.signInWithEmailAndPassword(
       email: email,
       password: password,
     );
   }
 }
 
-final authenticationRepository = Provider((ref) => AuthenticationRepository());
+final authenticationRepositoryProvider =
+    Provider((ref) => AuthenticationRepository());

@@ -8,7 +8,7 @@ final routerProvider = Provider((ref) {
   return GoRouter(
     initialLocation: '/',
     redirect: (BuildContext context, GoRouterState state) {
-      final isLoggedIn = ref.read(authenticationRepository).isLoggedIn;
+      final isLoggedIn = ref.read(authenticationRepositoryProvider).isLoggedIn;
       if (state.matchedLocation != LoginPage.routePath &&
           state.matchedLocation != SignupPage.routePath &&
           !isLoggedIn) {

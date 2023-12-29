@@ -1,4 +1,6 @@
+import 'package:day22/repositories/document_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'profile_tile_with_follow.dart';
 
@@ -61,29 +63,38 @@ const List<Map<String, dynamic>> _userData = [
   },
 ];
 
-class SearchedUserList extends StatelessWidget {
-  const SearchedUserList({super.key});
+class SearchedUserList extends ConsumerWidget {
+  final String? searchText;
+  const SearchedUserList({super.key, required this.searchText});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userDataAsyncValue =
+        ref.watch(searchDocumentsProvider(searchText ?? ''));
+    return userDataAsyncValue.when(
+      data: (userData) => buildListView(userData),
+      loading: () => const CircularProgressIndicator(),
+      error: (e, st) => Text('Error: $e'),
+    );
+  }
+
+  Widget buildListView(List<Map<String, dynamic>> userData) {
+    print(userData);
     return Expanded(
       child: ListView.separated(
-        itemCount: _userData.length,
+        itemCount: userData.length,
         itemBuilder: (context, index) {
+          var user = userData[index];
           return ProfileTileWithFollow(
-            imagePath: _userData[index]['imagePath'],
-            name: _userData[index]['name'],
-            userName: _userData[index]['userName'],
-            followers: _userData[index]['followers'],
-            isFollowing: _userData[index]['isFollowing'],
+            text: user['text'],
+            imagePath: 'assets/images/profile_image_1.jpg',
+            name: 'anonymous',
+            followers: 0,
+            isFollowing: false,
           );
         },
         separatorBuilder: (context, index) {
-          return const Divider(
-            height: 0,
-            thickness: 0.5,
-            indent: 65,
-          );
+          return const Divider(height: 0, thickness: 0.5, indent: 65);
         },
       ),
     );

@@ -148,7 +148,7 @@ class _SignupPageState extends ConsumerState<SignupPage> {
   void _createAccount() async {
     try {
       final userCredential =
-          await ref.read(authenticationRepository).createAccount(
+          await ref.read(authenticationRepositoryProvider).createAccount(
                 _mobileNumberOrEmailController.text,
                 _passwordController.text,
               );

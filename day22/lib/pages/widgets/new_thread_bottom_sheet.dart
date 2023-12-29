@@ -1,15 +1,20 @@
+import 'package:day22/models/document_model.dart';
+import 'package:day22/repositories/authentication_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../repositories/document_repository.dart';
 import 'profile_image_from_asset.dart';
 
-class NewThreadBottomSheet extends StatefulWidget {
+class NewThreadBottomSheet extends ConsumerStatefulWidget {
   const NewThreadBottomSheet({super.key});
 
   @override
-  State<NewThreadBottomSheet> createState() => _NewThreadBottomSheetState();
+  ConsumerState<NewThreadBottomSheet> createState() =>
+      _NewThreadBottomSheetState();
 }
 
-class _NewThreadBottomSheetState extends State<NewThreadBottomSheet> {
+class _NewThreadBottomSheetState extends ConsumerState<NewThreadBottomSheet> {
   static const String profileImagePath = 'assets/images/profile_image_1.jpg';
 
   static const profileSize = 50.0;
@@ -217,7 +222,7 @@ class _NewThreadBottomSheetState extends State<NewThreadBottomSheet> {
                 fontWeight: FontWeight.w500),
           ),
           GestureDetector(
-            onTap: () {},
+            onTap: _writePost,
             child: Text(
               'Post',
               style: TextStyle(
@@ -230,5 +235,21 @@ class _NewThreadBottomSheetState extends State<NewThreadBottomSheet> {
         ],
       ),
     );
+  }
+
+  void _writePost() async {
+    if (isTextValid) {
+      final text = _textEditingController.text;
+      final documentRepository = ref.read(documentRepositoryProvider);
+      final userId = ref.read(authenticationRepositoryProvider).user!.uid;
+      await documentRepository.saveDocument(
+        DocumentModel(
+          userId: userId,
+          text: text,
+          imagePath: profileImagePath,
+        ),
+      );
+      Navigator.pop(context);
+    }
   }
 }
