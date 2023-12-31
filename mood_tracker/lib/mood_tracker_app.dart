@@ -10,7 +10,7 @@ class MoodTrackerApp extends StatelessWidget {
     return MaterialApp.router(
       title: 'Mood Tracker',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.amber,
       ),
       routerConfig: mtRoutes,
     );

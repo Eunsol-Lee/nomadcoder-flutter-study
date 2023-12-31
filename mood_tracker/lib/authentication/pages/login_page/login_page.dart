@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:mood_tracker/mood_tracker/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
 class LoginPage extends StatelessWidget {
@@ -16,8 +18,7 @@ class LoginPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Gaps.v48,
-            Text('Mood Tracker',
-                style: Theme.of(context).textTheme.headlineLarge),
+            Text('Mood Tracker', style: Theme.of(context).textTheme.headlineLarge),
             Gaps.v24,
             TextFormField(
               decoration: const InputDecoration(
@@ -33,16 +34,28 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Gaps.v12,
-            ElevatedButton(
-              onPressed: () {
-                Navigator.of(context).pushNamed('/authentication/register');
-              },
-              child:
-                  Text('Login', style: Theme.of(context).textTheme.bodyLarge),
+            SizedBox(
+              width: double.infinity,
+              child: FilledButton.tonal(
+                onPressed: () => _login(context),
+                child: Text('Login', style: Theme.of(context).textTheme.bodyLarge),
+              ),
+            ),
+            Gaps.v12,
+            SizedBox(
+              width: double.infinity,
+              child: OutlinedButton(
+                onPressed: () {},
+                child: Text('Signup', style: Theme.of(context).textTheme.bodyLarge),
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  void _login(BuildContext context) {
+    context.goNamed(HomeTabPage.routeName);
   }
 }
