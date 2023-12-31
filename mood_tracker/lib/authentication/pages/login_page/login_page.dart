@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mood_tracker/authentication/index.dart';
 import 'package:mood_tracker/mood_tracker/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
@@ -37,7 +38,7 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: FilledButton.tonal(
-                onPressed: () => _login(context),
+                onPressed: () => _goToHomePage(context),
                 child: Text('Login', style: Theme.of(context).textTheme.bodyLarge),
               ),
             ),
@@ -45,8 +46,8 @@ class LoginPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () {},
-                child: Text('Signup', style: Theme.of(context).textTheme.bodyLarge),
+                onPressed: () => _goToSignupPage(context),
+                child: Text('-> Signup', style: Theme.of(context).textTheme.bodyLarge),
               ),
             ),
           ],
@@ -55,7 +56,11 @@ class LoginPage extends StatelessWidget {
     );
   }
 
-  void _login(BuildContext context) {
+  void _goToHomePage(BuildContext context) {
     context.goNamed(HomeTabPage.routeName);
+  }
+
+  void _goToSignupPage(BuildContext context) {
+    context.goNamed(SignupPage.routeName);
   }
 }
