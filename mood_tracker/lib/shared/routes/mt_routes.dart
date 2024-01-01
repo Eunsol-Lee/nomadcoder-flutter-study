@@ -30,7 +30,7 @@ final mtRoutes = GoRouter(
         GoRoute(
           path: SignupPage.routePath,
           name: SignupPage.routeName,
-          pageBuilder: (context, state) => NoTransitionPage(child: const SignupPage(), key: state.pageKey),
+          pageBuilder: (context, state) => NoTransitionPage(child: SignupPage(), key: state.pageKey),
         ),
       ],
     ),

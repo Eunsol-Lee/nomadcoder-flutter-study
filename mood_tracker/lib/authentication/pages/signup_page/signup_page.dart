@@ -13,58 +13,61 @@ class SignupPage extends HookWidget {
   final emailController = useTextEditingController();
   final passwordController = useTextEditingController();
   final confirmPasswordController = useTextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(Sizes.size16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Gaps.v48,
-            Text('Mood Tracker', style: Theme.of(context).textTheme.headlineLarge),
-            Gaps.v24,
-            TextFormField(
-              controller: emailController,
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                hintText: 'Enter your email',
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Gaps.v48,
+              Text('Mood Tracker', style: Theme.of(context).textTheme.headlineLarge),
+              Gaps.v24,
+              TextFormField(
+                controller: emailController,
+                decoration: const InputDecoration(
+                  labelText: 'Email',
+                  hintText: 'Enter your email',
+                ),
               ),
-            ),
-            Gaps.v12,
-            TextFormField(
-              controller: passwordController,
-              decoration: const InputDecoration(
-                labelText: 'Password',
-                hintText: 'Enter your password',
+              Gaps.v12,
+              TextFormField(
+                controller: passwordController,
+                decoration: const InputDecoration(
+                  labelText: 'Password',
+                  hintText: 'Enter your password',
+                ),
               ),
-            ),
-            Gaps.v12,
-            TextFormField(
-              controller: confirmPasswordController,
-              decoration: const InputDecoration(
-                labelText: 'Confirm Password',
-                hintText: 'Enter your password',
+              Gaps.v12,
+              TextFormField(
+                controller: confirmPasswordController,
+                decoration: const InputDecoration(
+                  labelText: 'Confirm Password',
+                  hintText: 'Enter your password',
+                ),
               ),
-            ),
-            Gaps.v12,
-            SizedBox(
-              width: double.infinity,
-              child: FilledButton.tonal(
-                onPressed: () => _signup(context),
-                child: Text('Signup', style: Theme.of(context).textTheme.bodyLarge),
+              Gaps.v12,
+              SizedBox(
+                width: double.infinity,
+                child: FilledButton.tonal(
+                  onPressed: () => _signup(context),
+                  child: Text('Signup', style: Theme.of(context).textTheme.bodyLarge),
+                ),
               ),
-            ),
-            Gaps.v12,
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () => _login(context),
-                child: Text('-> login', style: Theme.of(context).textTheme.bodyLarge),
+              Gaps.v12,
+              SizedBox(
+                width: double.infinity,
+                child: OutlinedButton(
+                  onPressed: () => _login(context),
+                  child: Text('-> login', style: Theme.of(context).textTheme.bodyLarge),
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
