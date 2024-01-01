@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mood_tracker/authentication/index.dart';
 import 'package:mood_tracker/mood_tracker/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends HookWidget {
   const LoginPage({super.key});
 
   static const routeName = 'authenticationLogin';
@@ -12,16 +13,25 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final emailController = useTextEditingController();
+    final passwordController = useTextEditingController();
+
     return Scaffold(
+      appBar: AppBar(
+        title: const AuthenticationTitle(),
+        centerTitle: true,
+        toolbarHeight: Sizes.size96,
+      ),
       body: Padding(
-        padding: const EdgeInsets.all(Sizes.size16),
+        padding: const EdgeInsets.all(Sizes.size60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Gaps.v48,
-            Text('Mood Tracker', style: Theme.of(context).textTheme.headlineLarge),
-            Gaps.v24,
+            Text('Welcome!', style: Theme.of(context).textTheme.titleLarge),
+            Gaps.v36,
             TextFormField(
+              controller: emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
                 hintText: 'Enter your email',
@@ -29,6 +39,7 @@ class LoginPage extends StatelessWidget {
             ),
             Gaps.v12,
             TextFormField(
+              controller: passwordController,
               decoration: const InputDecoration(
                 labelText: 'Password',
                 hintText: 'Enter your password',
@@ -37,20 +48,25 @@ class LoginPage extends StatelessWidget {
             Gaps.v12,
             SizedBox(
               width: double.infinity,
-              child: FilledButton.tonal(
+              child: MtButton(
+                'Enter',
                 onPressed: () => _goToHomePage(context),
-                child: Text('Login', style: Theme.of(context).textTheme.bodyLarge),
               ),
             ),
             Gaps.v12,
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () => _goToSignupPage(context),
-                child: Text('-> Signup', style: Theme.of(context).textTheme.bodyLarge),
-              ),
-            ),
+            Gaps.v96,
+            Gaps.v96,
           ],
+        ),
+      ),
+      bottomNavigationBar: Container(
+        padding: const EdgeInsets.symmetric(
+            horizontal: Sizes.size60, vertical: Sizes.size24),
+        height: Sizes.size96,
+        width: double.infinity,
+        child: MtButton(
+          'Create an account',
+          onPressed: () => _goToSignupPage(context),
         ),
       ),
     );

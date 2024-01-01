@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import 'shared/index.dart';
+import 'package:mood_tracker/shared/index.dart';
 
 class MoodTrackerApp extends StatelessWidget {
   const MoodTrackerApp({super.key});
@@ -9,9 +8,7 @@ class MoodTrackerApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       title: 'Mood Tracker',
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-      ),
+      theme: mtThemes,
       routerConfig: mtRoutes,
     );
   }
