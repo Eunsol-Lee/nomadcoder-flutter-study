@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mood_tracker/authentication/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
-class SignupPage extends HookWidget {
+import 'signup_page_view_model.dart';
+
+class SignupPage extends HookConsumerWidget {
   const SignupPage({super.key});
 
   static const routeName = 'authenticationSignup';
   static const routePath = 'signup';
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final emailController = useTextEditingController();
     final passwordController = useTextEditingController();
 
@@ -49,7 +52,10 @@ class SignupPage extends HookWidget {
               width: double.infinity,
               child: MtButton(
                 'Create Account',
-                onPressed: () => _goToHomePage(context),
+                onPressed: () => _createAccount(
+                    ref: ref,
+                    email: emailController.text,
+                    password: passwordController.text),
               ),
             ),
             Gaps.v12,
@@ -65,17 +71,21 @@ class SignupPage extends HookWidget {
         width: double.infinity,
         child: MtButton(
           'Log in',
-          onPressed: () => _goToSignupPage(context),
+          onPressed: () => _goToLoginPage(context),
         ),
       ),
     );
   }
 
-  void _goToHomePage(BuildContext context) {
-    // context.goNamed(HomeTabPage.routeName);
+  void _createAccount(
+      {required WidgetRef ref,
+      required String email,
+      required String password}) {
+    final viewModel = ref.watch(authenticationViewModelProvider);
+    viewModel.createAccount(email: email, password: password);
   }
 
-  void _goToSignupPage(BuildContext context) {
+  void _goToLoginPage(BuildContext context) {
     context.goNamed(LoginPage.routeName);
   }
 }
