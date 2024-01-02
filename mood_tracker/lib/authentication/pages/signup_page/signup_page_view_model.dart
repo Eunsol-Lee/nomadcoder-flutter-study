@@ -1,4 +1,4 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mood_tracker/authentication/index.dart';
 
 class AuthenticationViewModel {
@@ -11,11 +11,19 @@ class AuthenticationViewModel {
     try {
       await _repository.createUserWithEmailAndPassword(
           email: email, password: password);
-    } catch (e) {
-      rethrow;
+    } on AuthException catch (e) {
+      print(e);
     }
   }
 }
 
 final authenticationViewModelProvider = Provider((ref) =>
     AuthenticationViewModel(ref.watch(authenticationRepositoryProvider)));
+
+final createAccountProvider = FutureProvider.family<void, Map<String, String>>(
+  (ref, data) async {
+    final authViewModel = ref.watch(authenticationViewModelProvider);
+    await authViewModel.createAccount(
+        email: data['email']!, password: data['password']!);
+  },
+);
