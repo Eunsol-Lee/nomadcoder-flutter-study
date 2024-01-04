@@ -5,8 +5,6 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mood_tracker/authentication/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
-import 'signup_page_view_model.dart';
-
 class SignupPage extends HookConsumerWidget {
   const SignupPage({super.key});
 
@@ -52,10 +50,8 @@ class SignupPage extends HookConsumerWidget {
               width: double.infinity,
               child: MtButton(
                 'Create Account',
-                onPressed: () => _createAccount(
-                    ref: ref,
-                    email: emailController.text,
-                    password: passwordController.text),
+                onPressed: () =>
+                    _createAccount(ref: ref, email: emailController.text, password: passwordController.text),
               ),
             ),
             Gaps.v12,
@@ -65,8 +61,7 @@ class SignupPage extends HookConsumerWidget {
         ),
       ),
       bottomNavigationBar: Container(
-        padding: const EdgeInsets.symmetric(
-            horizontal: Sizes.size60, vertical: Sizes.size24),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.size60, vertical: Sizes.size24),
         height: Sizes.size96,
         width: double.infinity,
         child: MtButton(
@@ -77,10 +72,7 @@ class SignupPage extends HookConsumerWidget {
     );
   }
 
-  void _createAccount(
-      {required WidgetRef ref,
-      required String email,
-      required String password}) {
+  void _createAccount({required WidgetRef ref, required String email, required String password}) {
     final viewModel = ref.watch(authenticationViewModelProvider);
     viewModel.createAccount(email: email, password: password);
   }
