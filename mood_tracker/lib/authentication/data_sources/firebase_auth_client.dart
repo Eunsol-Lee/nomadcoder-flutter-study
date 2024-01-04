@@ -40,3 +40,9 @@ class FirebaseAuthClient implements AuthClient {
     }
   }
 }
+
+class AuthClientFactory {
+  static AuthClient createAuthClient() {
+    return FirebaseAuthClient(FirebaseAuth.instance);
+  }
+}

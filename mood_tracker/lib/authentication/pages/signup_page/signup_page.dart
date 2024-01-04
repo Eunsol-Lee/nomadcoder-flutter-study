@@ -25,11 +25,12 @@ class SignupPage extends HookConsumerWidget {
         toolbarHeight: Sizes.size96,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Sizes.size60),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.size60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(flex: 1),
             Text('Join!', style: Theme.of(context).textTheme.titleLarge),
             Gaps.v36,
             TextFormField(
@@ -58,9 +59,7 @@ class SignupPage extends HookConsumerWidget {
                     password: passwordController.text),
               ),
             ),
-            Gaps.v12,
-            Gaps.v96,
-            Gaps.v96,
+            const Spacer(flex: 3),
           ],
         ),
       ),
