@@ -5,6 +5,8 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mood_tracker/authentication/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
+import 'signup_page_view_model.dart';
+
 class SignupPage extends HookConsumerWidget {
   const SignupPage({super.key});
 
@@ -23,11 +25,12 @@ class SignupPage extends HookConsumerWidget {
         toolbarHeight: Sizes.size96,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Sizes.size60),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.size60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(flex: 1),
             Text('Join!', style: Theme.of(context).textTheme.titleLarge),
             Gaps.v36,
             TextFormField(
@@ -54,9 +57,7 @@ class SignupPage extends HookConsumerWidget {
                     _createAccount(ref: ref, email: emailController.text, password: passwordController.text),
               ),
             ),
-            Gaps.v12,
-            Gaps.v96,
-            Gaps.v96,
+            const Spacer(flex: 3),
           ],
         ),
       ),
@@ -73,7 +74,7 @@ class SignupPage extends HookConsumerWidget {
   }
 
   void _createAccount({required WidgetRef ref, required String email, required String password}) {
-    final viewModel = ref.watch(authenticationViewModelProvider);
+    final viewModel = ref.watch(signupPageViewModelProvider);
     viewModel.createAccount(email: email, password: password);
   }
 

@@ -7,7 +7,7 @@ part of 'signup_page_view_model.dart';
 // **************************************************************************
 
 String _$signupPageViewModelHash() =>
-    r'7257873328522123a381f3e54585915455cf92ff';
+    r'2c21fea41cb86a90a4503cb54783abe6f643d0fb';
 
 /// See also [SignupPageViewModel].
 @ProviderFor(SignupPageViewModel)

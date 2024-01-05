@@ -23,11 +23,12 @@ class LoginPage extends HookWidget {
         toolbarHeight: Sizes.size96,
       ),
       body: Padding(
-        padding: const EdgeInsets.all(Sizes.size60),
+        padding: const EdgeInsets.symmetric(horizontal: Sizes.size60),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            const Spacer(flex: 1),
             Text('Welcome!', style: Theme.of(context).textTheme.titleLarge),
             Gaps.v36,
             TextFormField(
@@ -53,9 +54,7 @@ class LoginPage extends HookWidget {
                 onPressed: () => _goToHomePage(context),
               ),
             ),
-            Gaps.v12,
-            Gaps.v96,
-            Gaps.v96,
+            const Spacer(flex: 3),
           ],
         ),
       ),
