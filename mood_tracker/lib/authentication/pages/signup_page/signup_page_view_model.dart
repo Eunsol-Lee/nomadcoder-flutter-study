@@ -10,8 +10,8 @@ class SignupPageViewModel extends _$SignupPageViewModel {
   SignupPageViewModel(this._repository);
 
   @override
-  FutureOr<CreateAccountResultModel> build() async {
-    return null;
+  FutureOr<CreateAccountResultModel> build() {
+    return CreateAccountResultModel.empty();
   }
 
   Future<void> createAccount({required String email, required String password}) async {
