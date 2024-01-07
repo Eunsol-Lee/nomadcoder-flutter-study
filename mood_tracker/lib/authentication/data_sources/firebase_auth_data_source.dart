@@ -35,10 +35,10 @@ class FirebaseAuthDataSource implements AuthDataSource {
   }
 
   @override
-  Future<CreateAccountResultModel> signInWithEmailAndPassword({required String email, required String password}) async {
+  Future<LoginResultModel> signInWithEmailAndPassword({required String email, required String password}) async {
     try {
       UserCredential userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-      return CreateAccountResultModel(userId: userCredential.user!.uid, email: userCredential.user!.email!);
+      return LoginResultModel(userId: userCredential.user!.uid, email: userCredential.user!.email!);
     } on FirebaseAuthException catch (e) {
       switch (e.code) {
         case 'invalid-email': // The email address is not valid.

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mood_tracker/shared/index.dart';
 
-class AuthenticationTitle extends StatelessWidget {
-  const AuthenticationTitle({super.key});
+class MtTitle extends StatelessWidget {
+  const MtTitle({super.key});
 
   @override
   Widget build(BuildContext context) {

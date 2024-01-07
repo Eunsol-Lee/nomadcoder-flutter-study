@@ -23,11 +23,11 @@ final mtThemes = ThemeData(
   textTheme: const TextTheme(
     titleLarge: _basicTextStyle,
     titleMedium: _basicTextStyle,
+    titleSmall: _basicTextStyle,
     bodyLarge: _basicTextStyle,
   ),
   inputDecorationTheme: InputDecorationTheme(
-    contentPadding: const EdgeInsets.symmetric(
-        horizontal: Sizes.size24, vertical: Sizes.size10),
+    contentPadding: const EdgeInsets.symmetric(horizontal: Sizes.size24, vertical: Sizes.size10),
     border: _getBasicOutlineInputBorder(width: Sizes.size2),
     focusedBorder: _getBasicOutlineInputBorder(width: Sizes.size3),
     enabledBorder: _getBasicOutlineInputBorder(width: Sizes.size2),

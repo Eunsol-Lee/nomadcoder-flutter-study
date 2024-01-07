@@ -12,11 +12,53 @@ import 'package:flutter/widgets.dart';
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/emoji_blush.png
+  AssetGenImage get emojiBlush =>
+      const AssetGenImage('assets/images/emoji_blush.png');
+
+  /// File path: assets/images/emoji_face_vomiting.png
+  AssetGenImage get emojiFaceVomiting =>
+      const AssetGenImage('assets/images/emoji_face_vomiting.png');
+
+  /// File path: assets/images/emoji_face_with_symbols_on_mouth.png
+  AssetGenImage get emojiFaceWithSymbolsOnMouth =>
+      const AssetGenImage('assets/images/emoji_face_with_symbols_on_mouth.png');
+
+  /// File path: assets/images/emoji_grin.png
+  AssetGenImage get emojiGrin =>
+      const AssetGenImage('assets/images/emoji_grin.png');
+
+  /// File path: assets/images/emoji_heart_eyes.png
+  AssetGenImage get emojiHeartEyes =>
+      const AssetGenImage('assets/images/emoji_heart_eyes.png');
+
+  /// File path: assets/images/emoji_sob.png
+  AssetGenImage get emojiSob =>
+      const AssetGenImage('assets/images/emoji_sob.png');
+
+  /// File path: assets/images/emoji_sunglasses.png
+  AssetGenImage get emojiSunglasses =>
+      const AssetGenImage('assets/images/emoji_sunglasses.png');
+
+  /// File path: assets/images/emoji_tired_face.png
+  AssetGenImage get emojiTiredFace =>
+      const AssetGenImage('assets/images/emoji_tired_face.png');
+
   /// File path: assets/images/fire.png
   AssetGenImage get fire => const AssetGenImage('assets/images/fire.png');
 
   /// List of all assets
-  List<AssetGenImage> get values => [fire];
+  List<AssetGenImage> get values => [
+        emojiBlush,
+        emojiFaceVomiting,
+        emojiFaceWithSymbolsOnMouth,
+        emojiGrin,
+        emojiHeartEyes,
+        emojiSob,
+        emojiSunglasses,
+        emojiTiredFace,
+        fire
+      ];
 }
 
 class Assets {

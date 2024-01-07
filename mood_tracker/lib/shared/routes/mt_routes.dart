@@ -5,6 +5,7 @@ import 'package:mood_tracker/mood_tracker/index.dart';
 import 'package:mood_tracker/shared/index.dart';
 
 const _initialLocation = '/authentication/login';
+// const _initialLocation = CreateㅇㅁㄹTabPage.routePath;
 
 final mtRoutes = GoRouter(
   initialLocation: _initialLocation,
@@ -42,9 +43,9 @@ final mtRoutes = GoRouter(
           pageBuilder: (context, state) => NoTransitionPage(child: const HomeTabPage(), key: state.pageKey),
         ),
         GoRoute(
-          path: SettingsTabPage.routePath,
-          name: SettingsTabPage.routeName,
-          pageBuilder: (context, state) => NoTransitionPage(child: const SettingsTabPage(), key: state.pageKey),
+          path: CreateTabPage.routePath,
+          name: CreateTabPage.routeName,
+          pageBuilder: (context, state) => NoTransitionPage(child: const CreateTabPage(), key: state.pageKey),
         ),
       ],
       pageBuilder: (context, state, child) =>
