@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+part 'pomodoro_view_model.g.dart';
+
 enum PomodoroState {
   ready,
   running,
@@ -8,47 +10,63 @@ enum PomodoroState {
   finished,
 }
 
-class PomodoroViewModel {
+class PomodoroViewModelState {
+  final PomodoroState state;
+  final int remainedSeconds;
+
+  PomodoroViewModelState({required this.state, required this.remainedSeconds});
+  String get remainedSecondsToString => '${remainedSeconds ~/ 60}:${remainedSeconds % 60}';
+}
+
+@Riverpod()
+class PomodoroViewModel extends _$PomodoroViewModel {
   final _pomodoroDuration = 1500;
-  PomodoroState state;
-  late int _remainedSeconds;
+
   Timer? _timer;
 
-  String get remainedSecondsToString =>
-      '${_remainedSeconds ~/ 60}:${_remainedSeconds % 60}';
+  @override
+  PomodoroViewModelState build() {
+    return PomodoroViewModelState(
+      state: PomodoroState.ready,
+      remainedSeconds: _pomodoroDuration,
+    );
+  }
 
-  PomodoroViewModel({
-    this.state = PomodoroState.ready,
-  }) {
-    _remainedSeconds = _pomodoroDuration;
+  dispose() {
+    _timer?.cancel();
   }
 
   void startOrResume() {
-    state = PomodoroState.running;
-    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      _remainedSeconds--;
-      if (_remainedSeconds <= 0) {
-        state = PomodoroState.finished;
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (_) {
+      if (state.remainedSeconds <= 0) {
+        state = PomodoroViewModelState(
+          state: PomodoroState.finished,
+          remainedSeconds: 0,
+        );
         _timer?.cancel();
+      } else {
+        state = PomodoroViewModelState(
+          state: PomodoroState.running,
+          remainedSeconds: state.remainedSeconds - 1,
+        );
       }
     });
   }
 
   void pause() {
-    state = PomodoroState.paused;
+    state = PomodoroViewModelState(
+      state: PomodoroState.paused,
+      remainedSeconds: state.remainedSeconds,
+    );
     _timer?.cancel();
   }
 
   void stopOrReset() {
-    state = PomodoroState.ready;
-    _remainedSeconds = _pomodoroDuration;
-    _timer?.cancel();
-  }
+    state = PomodoroViewModelState(
+      state: PomodoroState.ready,
+      remainedSeconds: _pomodoroDuration,
+    );
 
-  void dispose() {
     _timer?.cancel();
   }
 }
-
-@riverpod()
-final pomodoroViewModel = PomodoroViewModel();
