@@ -11,7 +11,7 @@ class AnimationApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: AnimationAppPage(),
+      home: const AnimationAppPage(),
     );
   }
 }
